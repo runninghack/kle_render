@@ -116,7 +116,9 @@ class Key(object):
 
         key_img = Image.merge('LAB', (l, a, b))
         key_img = ImageCms.applyTransform(key_img, lab2rgb_transform)
-        key_img = Image.merge('RGBA', (*key_img.split(), alpha))
+        elements = key_img.split()
+        temp = (elements[0], elements[1], elements[2], alpha)
+        key_img = Image.merge('RGBA', temp)
         return key_img
 
     def stretch_key(self, w, h, img=None): # width and height of key in units
